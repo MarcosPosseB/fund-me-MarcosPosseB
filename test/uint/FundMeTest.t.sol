@@ -112,7 +112,6 @@ contract FundMeTest is Test {
     }
 
     function testWithdrawFromMultipleFundersCheaper() public funded {
-        //Arrange
         uint160 numberOfFunders = 10;
         uint160 startingFunderIndex = 1;
         for (uint160 i = startingFunderIndex; i < numberOfFunders; i++) {
@@ -123,12 +122,10 @@ contract FundMeTest is Test {
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
 
-        //Act
         vm.startPrank(fundMe.getOwner());
         fundMe.cheaperWithDraw();
         vm.stopPrank();
 
-        //Assert
         assert(address(fundMe).balance == 0);
         assert(
             startingFundMeBalance + startingOwnerBalance ==
